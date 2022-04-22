@@ -16,6 +16,16 @@ jobs:
     # Below this are each of the steps that are run
     steps:
       # Name of step
+      - name: Find AWS EC2 instance
+        # Run AWS Command on the GitHub Hosted runner which starts the instance using AWS authentication stored in GitHub Secrets (see below how to add)
+        run: |
+          aws ec2 describe-instances -filters "Name=tag:Name,Values=android-github-runner-instance" -query "Reservations[].Instances[].InstanceId"
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ secrets.AWS_REGION }}
+
+      # Name of step
       - name: Start AWS EC2
         # Run AWS Command on the GitHub Hosted runner which starts the instance using AWS authentication stored in GitHub Secrets (see below how to add)
         run: |
