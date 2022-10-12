@@ -1,3 +1,4 @@
+# Create multistage build Dockerfile from alpine image
 FROM alpine:3.14 AS builder
 
 RUN apk add --no-cache build-base make git cmake
