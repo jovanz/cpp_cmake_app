@@ -7,3 +7,5 @@ mkdir build
 cmake ..
 make
 ```
+
+## One more manual step
